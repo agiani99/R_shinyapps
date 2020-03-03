@@ -19,7 +19,7 @@ library(heatmaply)
 library(dendextend)
 
 
-load("Y:/vitality index/VINDEX_Data/Vindex2/ref_tpx_CT.RData") # load .Rdata or run EDA_home_CT.R
+load("ref_tpx_CT.RData") # load .Rdata or run EDA_home_CT.R
 
 nms <- names(params_VC)
 
