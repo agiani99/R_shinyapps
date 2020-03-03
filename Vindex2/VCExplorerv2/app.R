@@ -17,7 +17,7 @@ library(lubridate)
 library(DT)
 
 
-load("Y:/vitality index/VINDEX_Data/Vindex2/ref_tpx.RData") # load .Rdata or run EDA_home2.R
+load("../ref_tpx.RData") # load .Rdata or run EDA_home2.R
 
 vindex <- function(df){
   vi <- df %>% select(fill) %>% colSums() %>% as.numeric()
