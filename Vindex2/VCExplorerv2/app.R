@@ -17,11 +17,7 @@ library(lubridate)
 library(DT)
 
 
-load("../ref_tpx_CT.RData") # load .Rdata or run EDA_home2.R
-
-nms <- names(params_VC)
-
-nms2 <- nms[-1]
+load("Y:/vitality index/VINDEX_Data/Vindex2/ref_tpx_CT.RData") # load .Rdata or run EDA_home2.R
 
 vindex <- function(df){
   vi <- df %>% select(fill) %>% colSums() %>% as.numeric()
@@ -29,9 +25,13 @@ vindex <- function(df){
   return(vi2)
 }
 
+nms <- names(params_VC)
+
+nms2 <- nms[-1]
+
 
 ui <- fluidPage(
-  titlePanel(title=div(img(src="fraunhofer_IME-logo_900p.jpg",
+  titlePanel(title=div(img(src="fraunhofer IME-logo_900p.jpg",
                            height="20%", width="20%", align="right"), "Vindex Basics v.2")),
   
   #tags$h2("Vindex Basics v.1"),
@@ -166,8 +166,10 @@ server <- function(input, output) {
     
     cohort_uplo_date <- reactive({
       uplodate <- VC_date_id %>% filter(DESCRIPTION == input$y) 
-      uplodate$VALUE <- as.numeric(uplodate$VALUE)
-      uplodate2 <- uplodate %>% spread(DESCRIPTION,VALUE) %>% select(-ID) %>% group_by(DATE)  %>% 
+      #uplodate$VALUE <- as.numeric(uplodate$VALUE)
+      uplodate2 <- uplodate %>% 
+        select(-all_of(c("groupAge", "PP_3_Geschlecht_fct","Su_142_Wenn_nicht_moechtest_du_daran_was_aendern_yn_fct"))) %>% 
+        spread(DESCRIPTION,VALUE) %>% select(-ID) %>% group_by(DATE)  %>% 
         summarise_all(list(meanco = mean , sdevco = sd))
       uplodate2 <- uplodate2 %>% mutate(upperlc = meanco + sdevco, lowerlc = meanco - sdevco)
       
@@ -197,7 +199,7 @@ server <- function(input, output) {
     
     req(selRows())
     
-    datatable(colls[1:116,],
+    datatable(nontidy_VC[,c(1:89,109)],
               options = list(searching = TRUE, lengthMenu = 5, "pageLength" = 10, scrollx = '800px', 
                              columnDefs = list(list(width = '150px', targets = "_all"))) ,
               selection = list(mode='multiple',
@@ -306,7 +308,7 @@ server <- function(input, output) {
         dataset_grouped3 <- reactive({
           req(input$PatID)
           dfs5 <- nontidy_VC %>% filter(ID == input$PatID) %>% 
-          select(-c(ID, DATE, groupAge, Su_142_Wenn_nicht_moechtest_du_daran_was_aendern_yn_fct,PP_3_Geschlecht_fct))
+            select(-c(ID, DATE, groupAge,Su_142_Wenn_nicht_moechtest_du_daran_was_aendern_yn_fct,PP_3_Geschlecht_fct))
           dfs6 <- as.data.frame(dfs5, stringAsFactors = F)
           dfs6 <- dfs6[,-2] # remove column with GesFact
           dfs6[] <- lapply(dfs6, as.numeric)
@@ -402,4 +404,6 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
+
 
