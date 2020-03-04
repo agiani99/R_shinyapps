@@ -1,0 +1,13 @@
+channels:
+- bioconda
+- conda-forge
+- defaults
+- r
+dependencies:
+# https://github.com/ContinuumIO/anaconda-issues/issues/4656
+- r-base
+- r-devtools
+- r-tidyverse
+- r-shiny
+- r-plotly
+- r-shinywidgets
