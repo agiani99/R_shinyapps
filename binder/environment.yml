@@ -7,7 +7,9 @@ dependencies:
 # https://github.com/ContinuumIO/anaconda-issues/issues/4656
 - r-base
 - r-devtools
-- r-tidyverse
-- r-shiny
+- r-flexdashboard
+- r-heatmaply
 - r-plotly
+- r-shiny
 - r-shinywidgets
+- r-tidyverse
