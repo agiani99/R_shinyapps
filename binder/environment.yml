@@ -3,12 +3,14 @@ channels:
 - conda-forge
 - defaults
 - r
-dependencies:
+dependencies
 # https://github.com/ContinuumIO/anaconda-issues/issues/4656
 - r-base
 - r-devtools
+- r-dt
 - r-flexdashboard
 - r-heatmaply
+- r-lubridate
 - r-plotly
 - r-shiny
 - r-shinywidgets
