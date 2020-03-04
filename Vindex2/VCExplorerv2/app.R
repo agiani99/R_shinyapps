@@ -17,7 +17,11 @@ library(lubridate)
 library(DT)
 
 
-load("../ref_tpx.RData") # load .Rdata or run EDA_home2.R
+load("../ref_tpx_CT.RData") # load .Rdata or run EDA_home2.R
+
+nms <- names(params_VC)
+
+nms2 <- nms[-1]
 
 vindex <- function(df){
   vi <- df %>% select(fill) %>% colSums() %>% as.numeric()
@@ -27,7 +31,7 @@ vindex <- function(df){
 
 
 ui <- fluidPage(
-  titlePanel(title=div(img(src="fraunhofer IME-logo_900p.jpg",
+  titlePanel(title=div(img(src="fraunhofer_IME-logo_900p.jpg",
                            height="20%", width="20%", align="right"), "Vindex Basics v.2")),
   
   #tags$h2("Vindex Basics v.1"),
@@ -37,7 +41,7 @@ ui <- fluidPage(
     # selectInput('x', 'CohortParameter', choices = names(nontidy_VC)[c(1,3:115)], selected = "P2_12_Tai.cm"),
     # selectInput('y', 'LongitudinalY', choices = names(nontidy_VC)[c(1,3:115)], selected = "KC_68_Trimg..mm"),
     # selectInput('color', 'Color', choices = names(nontidy_VC)[c(1,3:115)], selected = "KC_63_HbA..mmmolHb."),
-    selectInput('x', 'CohortParameter', choices =nms2, selected = "P2_12_Tai.cm"),
+    selectInput('x', 'CohortParameter', choices = nms2, selected = "P2_12_Tai.cm"),
     selectInput('y', 'LongitudinalY', choices = nms2, selected = "KC_68_Trimg..mm"),
     selectInput('color', 'Color', choices = nms2, selected = "KC_63_HbA..mmmolHb."),
     selectInput('class', 'Par.Type', choices = names(partype), selected = "PhysPar"),
