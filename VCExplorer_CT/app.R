@@ -45,7 +45,7 @@ cor.test.p <- function(x){
 
 
 ui <- fluidPage(
-  titlePanel(title=div(img(src="fraunhofer IME-logo_900p.jpg",
+  titlePanel(title=div(img(src="fraunhofer_IME-logo_900p.jpg",
                            height="15%", width="15%", align="right"), "Vindex Basics v.3")),
   
   #tags$h2("Vindex Basics v.1"),
