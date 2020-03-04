@@ -19,9 +19,9 @@ library(DT)
 
 load("../ref_tpx_CT.RData") # load .Rdata or run EDA_home2.R
 
-nms <- names(params_VC)
+#nms <- names(params_VC)
 
-nms2 <- nms[-1]
+#nms2 <- nms[-1]
 
 vindex <- function(df){
   vi <- df %>% select(fill) %>% colSums() %>% as.numeric()
@@ -41,9 +41,9 @@ ui <- fluidPage(
     # selectInput('x', 'CohortParameter', choices = names(nontidy_VC)[c(1,3:115)], selected = "P2_12_Tai.cm"),
     # selectInput('y', 'LongitudinalY', choices = names(nontidy_VC)[c(1,3:115)], selected = "KC_68_Trimg..mm"),
     # selectInput('color', 'Color', choices = names(nontidy_VC)[c(1,3:115)], selected = "KC_63_HbA..mmmolHb."),
-    selectInput('x', 'CohortParameter', choices = nms2, selected = "P2_12_Tai.cm"),
-    selectInput('y', 'LongitudinalY', choices = nms2, selected = "KC_68_Trimg..mm"),
-    selectInput('color', 'Color', choices = nms2, selected = "KC_63_HbA..mmmolHb."),
+    selectInput('x', 'CohortParameter', choices =nms2, selected = "P2_12_Taillenumfang_cm"),
+    selectInput('y', 'LongitudinalY', choices = nms2, selected = "KC_68_Triglyceride_mgdl_mmoll"),
+    selectInput('color', 'Color', choices = nms2, selected = "KC_63_HbA1c_mmol_molHb"),
     selectInput('class', 'Par.Type', choices = names(partype), selected = "PhysPar"),
     #selectInput('facet_row', 'Facet Row', c(None = '.', nms2), selected = "None"),
     #selectInput('facet_col', 'Facet Column', c(None = '.', nms2)),
@@ -305,7 +305,8 @@ server <- function(input, output) {
         
         dataset_grouped3 <- reactive({
           req(input$PatID)
-          dfs5 <- nontidy_VC %>% filter(ID == input$PatID) %>% select(-c(ID, DATE, groupAge))
+          dfs5 <- nontidy_VC %>% filter(ID == input$PatID) %>% 
+          select(-c(ID, DATE, groupAge, Su_142_Wenn_nicht_moechtest_du_daran_was_aendern_yn_fct,PP_3_Geschlecht_fct))
           dfs6 <- as.data.frame(dfs5, stringAsFactors = F)
           dfs6 <- dfs6[,-2] # remove column with GesFact
           dfs6[] <- lapply(dfs6, as.numeric)
