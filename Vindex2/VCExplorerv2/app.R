@@ -31,8 +31,8 @@ nms2 <- nms[-1]
 
 
 ui <- fluidPage(
-  titlePanel(title=div(img(src="fraunhofer IME-logo_900p.jpg",
-                           height="20%", width="20%", align="right"), "Vindex Basics v.2")),
+  titlePanel(title=div(img(src="fraunhofer_IME-logo_900p.jpg",
+                                         height="20%", width="20%", align="right"), "Vindex Basics v.2")),
   
   #tags$h2("Vindex Basics v.1"),
   p("An attempt to visualize a virtual cohort with patient-related deviations from means +/- sd and a possible VINDEX score"),
