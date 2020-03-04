@@ -3,7 +3,7 @@ channels:
 - conda-forge
 - defaults
 - r
-dependencies
+dependencies:
 # https://github.com/ContinuumIO/anaconda-issues/issues/4656
 - r-base
 - r-devtools
