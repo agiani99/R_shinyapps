@@ -16,12 +16,12 @@ library(tidyr)
 library(flexdashboard)
 library(DT)
 
-load("Y:/vitality index/VINDEX_Data/Vindex1/setup.RData") # load .Rdata or run setup.R
+load("setup.RData") # load .Rdata or run setup.R
 
 
 
 ui <- fluidPage(
-  titlePanel(title=div(img(src="fraunhofer IME-logo_900p.jpg",
+  titlePanel(title=div(img(src="fraunhofer_IME-logo_900p.jpg",
                                          height="20%", width="20%", align="right"), "Vindex Basics v.1")),
    
   #tags$h2("Vindex Basics v.1"),
