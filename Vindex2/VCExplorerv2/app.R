@@ -19,9 +19,9 @@ library(DT)
 
 load("../ref_tpx_CT.RData") # load .Rdata or run EDA_home2.R
 
-#nms <- names(params_VC)
+nms <- names(params_VC)
 
-#nms2 <- nms[-1]
+nms2 <- nms[-1]
 
 vindex <- function(df){
   vi <- df %>% select(fill) %>% colSums() %>% as.numeric()
