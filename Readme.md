@@ -19,7 +19,7 @@ To build locally:
  * Create a virtual environment and install repo2docker from PyPI.
  * Clone this repository
  * Run ``repo2docker``
- * Depending on the permissions, you might have to run the command as an admin
+ * Depending on the permissions, you might have to run the command as an admin and give --user-id xxxx and --user-name name 
 
 ```
 pip install jupyter-repo2docker
