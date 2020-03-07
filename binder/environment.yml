@@ -15,6 +15,7 @@ dependencies:
 - r-heatmaply
 - r-lubridate
 - r-plotly
+- r-rcolorbrewer
 - r-scales
 - r-shiny
 - r-shinywidgets
