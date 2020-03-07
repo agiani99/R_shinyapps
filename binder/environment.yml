@@ -16,7 +16,7 @@ dependencies:
 - r-flexdashboard
 - r-ggbiplot
 - r-ggpubr
-- r-ggthemr
+- r-ggthemes
 - r-gridbase
 - r-gridextra
 - r-gtable
