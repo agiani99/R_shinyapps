@@ -7,7 +7,7 @@ a) VC_explorer v1 is completed. Synthea generated patients/control cohort with b
 
 b) VCExplorer_CT is working. A combination of labor generated data merged with RR data and derivatives thereof from probands wearables. [VCExplorer_CT App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/VCExplorer_CT/)
 
-c) IME_Score2 is very similar to VCExplorer_CT. There are no wearables data involved. It seems to be more like a beta version. [IME_Score2 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/Vindex2/VCExplorerv2/)
+c) IME_Score2 is very similar to VCExplorer_CT. There are no wearables data involved. It seems to be more like a beta version. [IME_Score2 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/IME_Score2/)
 
 
 # Instructions
