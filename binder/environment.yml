@@ -9,9 +9,13 @@ dependencies:
 - r-devtools
 - r-dt
 - r-flexdashboard
+- r-gridbase
+- r-gridextra
+- r-gtable
 - r-heatmaply
 - r-lubridate
 - r-plotly
+- r-scales
 - r-shiny
 - r-shinywidgets
 - r-tidyverse
