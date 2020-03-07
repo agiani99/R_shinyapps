@@ -29,13 +29,11 @@ library(tidyr)
 library(flexdashboard)
 library(plotly)
 library(DT)
-#library(ggrepel)
-#library(sp)
 library(wesanderson)
 
 #load("Y:/Braintuning_Kuschel/Kuschel_home/All23_HRV_v1.RData")
 
-load("HRV_V2_w_msd.RData")
+load("Y:/Braintuning_Kuschel/Kuschel_home/HRV_V2/HRV_V2_w_msd.RData")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -44,26 +42,21 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       helpText(),
-      selectInput('x', 'Proband RR spectrum:',
-                  choices = all23$ID, selected = '8511801330_2018-08-15_11-14-47', width = '100%'),
-      selectInput('y', 'Parameter to plot vs time:',
-                  choices = c("RR_ms","bpm"), selected = 'bpm', width = '100%'),
+      selectInput('x', 'Proband RR spectrum:',choices = all23$ID, 
+                  selected = '8511801330_2018-08-15_11-14-47', width = '100%'),
+      selectInput('y', 'Parameter to plot vs time:', choices = c("RR_ms","bpm"),
+                  selected = 'bpm', width = '100%'),
       selectInput('z', 'Parameter to plot vs bpm or boxplot:',
                   choices = names(temp), selected = 'RR_ms', width = '100%'),
-      selectInput("period", "Observation Period", choices = c("Awake", "Sleep", "All"), selected = "All", width = '100%'),
-      pickerInput(
-        inputId = "myPicker", 
-        label = "Select/deselect all + format selected", 
+      selectInput("period", "Observation Period", choices = c("Awake", "Sleep", "All"), 
+                  selected = "All", width = '100%'),
+      pickerInput(inputId = "myPicker", label = "Select/deselect all + format selected", 
         choices = nms_scaled,
         selected = nms_scaled[c(20,29,30,31,32,33,34,11,35,8)],
-        options = list(
-          `actions-box` = TRUE, 
-          size = 10,
-          `selected-text-format` = "count > 3"
-        ), 
-        multiple = TRUE))),
-      #radioButtons('format', 'Document format', c('PDF', 'png', 'jpg'),inline = TRUE),
-      #downloadButton('downloadReport'), width = 4),
+        options = list(`actions-box` = TRUE,
+                       size = 10,
+                       `selected-text-format` = "count > 3"), multiple = TRUE)
+      ),
     mainPanel(
       tabsetPanel(
         tabPanel("Plot Single", plotOutput("PlotRR")),
@@ -82,8 +75,8 @@ ui <- fluidPage(
         
       )
     )
+  )
 )
-
 
 
 # Define server logic required to draw a histogram
@@ -475,5 +468,6 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
 
 
