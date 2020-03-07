@@ -5,25 +5,25 @@ library(DT)
 library(gtable)
 library(grid)
 library(gridExtra)
-library(scales)
 library(plotly)
+library(scales)
 library(heatmaply)
 library(RColorBrewer)
 
 
-load("reference_100_colorectal.RData")
+load("Y:/BMBF/ZUKUNFTCluster/Colorectal/colorectal_100_app/reference_100_colorectal.RData")
 
 nms <- names(patients5)
 patname <- patients5 %>% filter(!is.na(Name)) %>% select(Name) %>% unique() %>% unlist()
 
 patients_means <- patient2 %>% group_by(Name) %>% select_if(is.numeric) %>% 
   summarise_all(list(mean), na.rm = T) %>% ungroup %>% select(-ID)
-ID_name_list <- patients5 %>% group_by(Name) %>% select(Id) %>% unique() %>% filter(!is.na(Name)) %>% ungroup
+ID_name_list <- patients5 %>% group_by(Name) %>% select(all_of(c("Id","Name"))) %>% unique() %>% filter(!is.na(Name)) %>% ungroup
 temp <- observations %>% pivot_wider(names_from = DESCRIPTION, values_from = VALUE)
-temp <- inner_join(temp, ID_name_list, by = "Id")
-selected_obs <- temp %>% group_by(Name) %>% select(c("Polyp size greatest dimension by CAP cancer protocols",
+temp2 <- inner_join(temp, ID_name_list, by = "Id")
+selected_obs <- temp2 %>% group_by(Name) %>% select(all_of(c("Name","Polyp size greatest dimension by CAP cancer protocols",
                                                      "Hemoglobin.gastrointestinal [Presence] in Stool by Immunologic method"
-)) %>% 
+))) %>% 
   summarise_all(list(mean), na.rm = T) %>% ungroup
 
 selected_obs_patients <- inner_join(patients_means, selected_obs, by = "Name")
@@ -34,7 +34,7 @@ nms_selected <- names(selected_obs_patients)
 ui <- fluidPage(
   
   titlePanel(title=div(img(src="fraunhofer IME-logo_900p.jpg",
-                           height="15%",width="15%",align="right"),"Cohort 100 Explorer")),
+                           height="15%", width="15%", align="right"), "Cohort 100 Explorer")),
   sidebarPanel(
     sliderInput('sampleSize', 'Sample Size', min = 1, max = length(table(patients5$Name)),
                 value = 20, step = 5, round = 0),
@@ -212,6 +212,7 @@ server <- function(input, output) {
   output$heatmap <- renderPlotly({
     
     M <- as.matrix(cor(selected_obs_patients[,-c(1,24:27)], use = "pairwise.complete.obs"))
+    
     t <- unlist(dimnames(M))
     t[c(21:22,43:44)] <- c("Polyp size dim","Hemoglobin_in_stool")
     row.names(M) <- t[1:22]
@@ -252,3 +253,4 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
