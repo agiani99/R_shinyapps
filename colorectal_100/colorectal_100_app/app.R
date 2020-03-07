@@ -34,7 +34,7 @@ nms_selected <- names(selected_obs_patients)
 ui <- fluidPage(
   
   titlePanel(title=div(img(src="fraunhofer IME-logo_900p.jpg",
-                           height="20%", width="20%", align="right"), "Cohort 100 Explorer")),
+                           height="20%",width="20%",align="right"),"Cohort 100 Explorer")),
   sidebarPanel(
     sliderInput('sampleSize', 'Sample Size', min = 1, max = length(table(patients5$Name)),
                 value = 20, step = 5, round = 0),
