@@ -6,6 +6,7 @@ channels:
 dependencies:
 # https://github.com/ContinuumIO/anaconda-issues/issues/4656
 - r-base
+- r-cowplot
 - r-devtools
 - r-dt
 - r-flexdashboard
