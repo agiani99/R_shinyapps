@@ -209,7 +209,7 @@ server <- function(input, output) {
     plot_grid(plotlist = tqs(), labels = labelsP, ncol = 1, align = "hv", axis = "b")
     })
   
-  output$heatmap <- renderD3heatmap({
+  output$heatmap <- renderPlotly({
     
     M <- as.matrix(cor(selected_obs_patients[,-c(1,24:27)], use = "pairwise.complete.obs"))
     t <- unlist(dimnames(M))
