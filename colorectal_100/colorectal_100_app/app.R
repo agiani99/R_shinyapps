@@ -9,6 +9,7 @@ library(plotly)
 library(scales)
 library(heatmaply)
 library(RColorBrewer)
+library(cowplot)
 
 
 load("reference_100_colorectal.RData")
