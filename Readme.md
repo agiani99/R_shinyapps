@@ -12,6 +12,7 @@ c) Vindex2 is very similar to VCExplorer_CT. There are no wearables data involve
 
 To run the shiny apps, you can either [run on mybinder.org](https://mybinder.org/v2/gh/agiani99/R_shinyapps/) or build locally with [repo2docker](https://repo2docker.readthedocs.io/).
 
+If you decide for direct run clicking links under mybinder, it might take few minutes to build the underlining virtual machine, so be patient and let it run.
 
 To build locally:
 
