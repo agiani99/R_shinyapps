@@ -9,7 +9,7 @@ b) VCExplorer_CT is working. A combination of labor generated data merged with R
 
 c) IME_Score2 is very similar to VCExplorer_CT. There are no wearables data involved. It seems to be more like a beta version. [IME_Score2 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/IME_score2/)
 
-d) Colorectal_100 is yet-another virtual cohort based on [Synthea](https://github.com/synthetichealth/synthea). Basic visulization are same as in the above examples. [Colorectal](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/Colorectal_100/Colorectal_100_app/)
+d) Colorectal_100 is yet-another virtual cohort based on [Synthea](https://github.com/synthetichealth/synthea). Basic visulization are same as in the above examples. [Colorectal](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/colorectal_100/colorectal_100_app/)
 
 # Instructions
 --------------
