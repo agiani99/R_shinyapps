@@ -22,10 +22,10 @@ load("setup.RData") # load .Rdata or run setup.R
 
 ui <- fluidPage(
   titlePanel(title=div(img(src="fraunhofer_IME-logo_900p.jpg",
-                                         height="20%", width="20%", align="right"), "Vindex Basics v.1")),
+                                         height="20%", width="20%", align="right"), "IME Score Basics v.1")),
    
   #tags$h2("Vindex Basics v.1"),
-  p("An attempt to visualize a virtual cohort with patient-related deviations from means +/- sd and a possible VINDEX score"),
+  p("An attempt to visualize a virtual cohort with patient-related deviations from means +/- sd and a possible IME Score"),
   #hr(),
   sidebarPanel(
     sliderInput('sampleSize', 'Sample Size', min = 1, max = nrow(original_VC),
@@ -59,7 +59,7 @@ ui <- fluidPage(
                 tabPanel("Barplot", plotlyOutput('Barplot2'),width = "600px", height = "700px"),
                 tabPanel("Lollipop", plotOutput("Lollipop"),width = "600px", height = "700px"),
                 #tabPanel("Vindex", gaugeOutput('Gauge'), width = "700px", height = "700px"),
-                tabPanel("Vindex",
+                tabPanel("IME Score",
                          fluidRow(
                            splitLayout(cellWidths = c("100%", "90%"), plotlyOutput('Gauge')), #gaugeOutput('Gauge'))#width = "700px", height = "700px"),
                            DT::dataTableOutput(outputId="Table")
@@ -274,7 +274,7 @@ server <- function(input, output) {
     #       symbol = "%",
     #       label = "Vindex = Count of\nmagenta columns\nover total")
     # 
-    titlepat <- reactive ({ paste("\nVindex Score for ", input$PatID, sep = "") })
+    titlepat <- reactive ({ paste("\nIME Score for ", input$PatID, sep = "") })
     
     p <- plot_ly(
       domain = list(x = c(0, 1), y = c(0, 1)),
