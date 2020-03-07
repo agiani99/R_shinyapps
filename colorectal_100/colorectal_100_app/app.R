@@ -11,7 +11,7 @@ library(heatmaply)
 library(RColorBrewer)
 
 
-load("Y:/BMBF/ZUKUNFTCluster/Colorectal/colorectal_100_app/reference_100_colorectal.RData")
+load("reference_100_colorectal.RData")
 
 nms <- names(patients5)
 patname <- patients5 %>% filter(!is.na(Name)) %>% select(Name) %>% unique() %>% unlist()
