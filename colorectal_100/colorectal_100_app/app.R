@@ -5,8 +5,8 @@ library(DT)
 library(gtable)
 library(grid)
 library(gridExtra)
-library(cowplot)
 library(scales)
+library(plotly)
 library(heatmaply)
 library(RColorBrewer)
 
@@ -58,7 +58,7 @@ ui <- fluidPage(
       tabPanel("Table", dataTableOutput("Table")),
       tabPanel("Outliers", plotOutput("ellipse_plot", height = "800px", width = "500px")),
       tabPanel("Individual", plotOutput("Individual", height = "800px", width = "500px")),
-      tabPanel("Correlations", d3heatmapOutput("heatmap", width = "90%", height="600px")),
+      tabPanel("Correlations", plotlyOutput("heatmap", width = "90%", height="600px")),
       tabPanel("Selected plot", plotOutput("Specific", height = "600px", width = "500px"))
     )
   )
