@@ -7,7 +7,7 @@ library(grid)
 library(gridExtra)
 library(cowplot)
 library(scales)
-library(d3heatmap)
+library(heatmaply)
 library(RColorBrewer)
 
 
@@ -212,9 +212,15 @@ server <- function(input, output) {
   output$heatmap <- renderD3heatmap({
     
     M <- as.matrix(cor(selected_obs_patients[,-c(1,24:27)], use = "pairwise.complete.obs"))
+    t <- unlist(dimnames(M))
+    t[c(21:22,43:44)] <- c("Polyp size dim","Hemoglobin_in_stool")
+    row.names(M) <- t[1:22]
+    colnames(M) <- t[1:22]
 
-    d3heatmap(M, dendrogram = "column", digits = 2, col=brewer.pal(9,"Blues"), Colv = T, k_col = 4,
-              Rowv = T, xaxis_font_size=10, yaxis_font_size=10)
+    #d3heatmap(M, dendrogram = "column", digits = 2, col=brewer.pal(9,"Blues"), Colv = T, k_col = 4,
+    #          Rowv = T, xaxis_font_size=10, yaxis_font_size=10)
+    heatmaply_cor(M, limits = c(-1,1), dendrogram = "column", Colv = T, Rowv = T,
+                  label_names = c("x", "y", "Correlation"))
     
   })
   
