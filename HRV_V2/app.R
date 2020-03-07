@@ -22,7 +22,7 @@ library(psych)
 library(imputeTS)
 library(ggpubr)
 library(shinythemes)
-library(ggthemr)
+library(ggthemes)
 library(ggbiplot)
 library(shinyWidgets)
 library(tidyr)
@@ -34,7 +34,7 @@ library(DT)
 
 #load("Y:/Braintuning_Kuschel/Kuschel_home/All23_HRV_v1.RData")
 
-load("Y:/Braintuning_Kuschel/Kuschel_home/HRV_V2/HRV_V2_w_msd.RData")
+load("HRV_V2_w_msd.RData")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
