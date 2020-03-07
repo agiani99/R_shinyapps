@@ -46,10 +46,10 @@ cor.test.p <- function(x){
 
 ui <- fluidPage(
   titlePanel(title=div(img(src="fraunhofer_IME-logo_900p.jpg",
-                           height="15%", width="15%", align="right"), "Vindex Basics v.3")),
+                           height="15%", width="15%", align="right"), "IME Score Basics v.3")),
   
   #tags$h2("Vindex Basics v.1"),
-  p("An attempt to visualize a virtual cohort with patient-related deviations from means +/- sd and a possible VINDEX score"),
+  p("An attempt to visualize a virtual cohort with patient-related deviations from means +/- sd and a possible IME score"),
   #hr(),
   sidebarPanel(
     # selectInput('x', 'CohortParameter', choices = names(nontidy_VC)[c(1,3:115)], selected = "P2_12_Tai.cm"),
@@ -77,7 +77,7 @@ ui <- fluidPage(
                   DT::dataTableOutput(outputId="Param"), width = "auto", height = "800px"),
                 #tabPanel("Lollipop", plotOutput("Lollipop"),width = "600px", height = "700px"),
                 #tabPanel("Vindex", gaugeOutput('Gauge'), width = "700px", height = "700px"),
-                tabPanel("Vindex",fluidRow(
+                tabPanel("IME Score",fluidRow(
                   splitLayout(cellWidths = c("100%","100%")), 
                   plotlyOutput('Gauge'),
                   plotlyOutput('Gauge2'))),
@@ -426,11 +426,11 @@ server <- function(input, output){
   titlepat <- eventReactive({
     input$PatID
     input$myPicker
-  },{ paste("\nVindex Score for ", input$PatID, " on ", input$myPicker, " parameters",sep = "") })
+  },{ paste("\nIME Score for ", input$PatID, " on ", input$myPicker, " parameters",sep = "") })
   
   titlepatall <- eventReactive({
     input$PatID
-  },{ paste("\nVindex Score for ", input$PatID, " on all parameters",sep = "") })
+  },{ paste("\nIME Score for ", input$PatID, " on all parameters",sep = "") })
   
   dataset_heat <- eventReactive({
     nontidy_VC_class()
