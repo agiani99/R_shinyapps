@@ -3,7 +3,7 @@
 
 This a repository collecting shiny apps I have been generating
 
-a) VC_explorer v1 is completed. Synthea generated patients/control cohort with breast cancer data. [VC_explorer v1 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/VC_explorer_v1/)
+a) VC_explorer v1 is completed. [Synthea](https://github.com/synthetichealth/synthea) generated patients/control cohort with breast cancer data. [VC_explorer v1 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/VC_explorer_v1/)
 
 b) VCExplorer_CT is working. A combination of labor generated data merged with RR data and derivatives thereof from probands wearables. [VCExplorer_CT App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/VCExplorer_CT/)
 
