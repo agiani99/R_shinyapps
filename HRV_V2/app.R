@@ -285,7 +285,7 @@ server <- function(input, output) {
                                               size = 0.5, linetype = "solid")) +
         
         geom_text(data = llbb(), aes(x = PC1, y = PC2),
-                  label = substr(input$x,1,10) ,hjust = 0, nudge_x = 0.1) +
+                  label = substr(input$x,1,10) ,hjust = 0.2, nudge_x = 0.2) +
         guides(color= F) +
         guides(color=guide_legend(title="Stress Level")) 
     })
