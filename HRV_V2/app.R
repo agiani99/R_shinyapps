@@ -172,8 +172,8 @@ server <- function(input, output) {
                 palette = "dark2", add = "reg.line", conf.int = T) + xlab("bpm") + 
         ylab(input$z) +
         theme_white() +
-        theme(plot.background = element_rect(fill = "#333366",
-                                        colour = "#333366",
+        theme(plot.background = element_rect(fill = "#2b3e50",
+                                        colour = "#2b3e50",
                                         size = 0.5, linetype = "solid")) +
         stat_cor(aes(color = class, label =paste(..rr.label.., 
                                                  cut(..p.., breaks = c(-Inf, 0.0001, 0.001, 0.01, 0.05, Inf),
@@ -217,8 +217,8 @@ server <- function(input, output) {
         xlab("Stress Level") + ylab(input$z) + #guides(colour = FALSE) +
         labs(caption = paste(input$period, " values taken into account",sep = "")) +
         theme_white() + 
-        theme(plot.background = element_rect(fill = "#333366",
-                                              colour = "#333366",
+        theme(plot.background = element_rect(fill = "#2b3e50",
+                                              colour = "#2b3e50",
                                               size = 0.5, linetype = "solid")) + # Discrete color
         #scale_fill_manual(values = wes_palette("GrandBudapest1", n = 3))
         scale_fill_manual(values = wes_palette("Moonrise3", n = 3))
@@ -266,8 +266,8 @@ server <- function(input, output) {
       geom_point(size = 5) +
       xlab(percentage[1]) + ylab(percentage[2]) +
       theme_white() +
-      theme(plot.background = element_rect(fill = "#333366",
-                                            colour = "#333366",
+      theme(plot.background = element_rect(fill = "#2b3e50",
+                                            colour = "#2b3e50",
                                             size = 0.5, linetype = "solid"))
     
 
