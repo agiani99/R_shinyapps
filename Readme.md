@@ -5,9 +5,9 @@ This a repository collecting shiny apps I have been generating
 
 a) VC_explorer v1 is completed. [Synthea](https://github.com/synthetichealth/synthea) generated patients/control cohort with breast cancer data. [VC_explorer v1 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/VC_explorer_v1/)
 
-b) VCExplorer_CT is working. A combination of labor generated data merged with RR data and derivatives thereof from probands wearables. [VCExplorer_CT App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/VCExplorer_CT/)
+b) VCExplorer_CT is an advanced version of IME_Score2. The idea is to display some parameters from a virtual observational cohort especially tailored towards fitness and prevention. [VCExplorer_CT App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/VCExplorer_CT/)
 
-c) IME_Score2 is very similar to VCExplorer_CT. There are no wearables data involved. It seems to be more like a beta version. [IME_Score2 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/IME_score2/)
+c) IME_Score2 is very similar to VCExplorer_CT. There are no wearables data involved. [IME_Score2 App](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/IME_score2/)
 
 d) Colorectal_100 is yet-another virtual cohort based on [Synthea](https://github.com/synthetichealth/synthea). Basic visulization are same as in the above examples. [Colorectal](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/colorectal_100/colorectal_100_app/)
 
