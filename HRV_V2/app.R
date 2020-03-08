@@ -269,17 +269,28 @@ server <- function(input, output) {
     percentage <- round(PCA$sdev / sum(PCA$sdev) * 100, 2)
     percentage <- paste(colnames(PCA$x), "(var.explained ", paste( as.character(percentage), "%", ")", sep="") )
     
+    # label
+    llbb <- reactive({
+       PCAvalues[which(PCAvalues$ID == input$x),c(1:3,25)]
+     })
     # Plot
-    ggplot(PCAvalues[,c(1:3,25)], aes(x = PC1, y = PC2, colour = Species)) +
-      stat_ellipse(level = 0.95, size = 1, show.legend = FALSE) +
-      geom_point(size = 5) +
-      xlab(percentage[1]) + ylab(percentage[2]) +
-      theme_white() +
-      theme(#plot.background = element_rect(colour = "transparent"),
-            plot.background = element_rect(fill = "#2b3e50",
-                                            colour = "#2b3e50",
-                                            size = 0.5, linetype = "solid")) +
-      guides(color=guide_legend(title="Stress Level"))
+    p <- reactive({ggplot(PCAvalues[,c(1:3,25)], aes(x = PC1, y = PC2, colour = Species)) +
+        stat_ellipse(level = 0.95, size = 1, show.legend = FALSE) +
+        geom_point(size = 5) +
+        xlab(percentage[1]) + ylab(percentage[2]) +
+        theme_white() +
+        theme(#plot.background = element_rect(colour = "transparent"),
+              plot.background = element_rect(fill = "#2b3e50",
+                                              colour = "#2b3e50",
+                                              size = 0.5, linetype = "solid")) +
+        
+        geom_text(data = llbb(), aes(x = PC1, y = PC2),
+                  label = substr(input$x,1,10) ,hjust = 0, nudge_x = 0.1) +
+        guides(color= F) +
+        guides(color=guide_legend(title="Stress Level")) 
+    })
+    
+    p()
     
 
   },width = 900, height = 700)
