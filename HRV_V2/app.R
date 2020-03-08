@@ -149,7 +149,7 @@ server <- function(input, output) {
            axis.text.y = element_text(angle = 0, size=13 , color = "white"),
            axis.title.x = element_text(size=14, face="bold", vjust = -1, color = "white"),
            axis.title.y = element_text(size=14, face="bold", vjust = 2, color = "white")) 
-    },width = 600, height = 700, bg = "transparent")#,execOnResize = TRUE)
+    },width = 900, height = 700, bg = "transparent")#,execOnResize = TRUE)
     
   output$PlotCO <- renderPlot({
     #par(mar = c(4, 4, .1, .1))
@@ -191,7 +191,7 @@ server <- function(input, output) {
     
     p()
     
-    }, width = 600, height = 700, bg = "transparent")#, execOnResize = TRUE)
+    }, width = 900, height = 700, bg = "transparent")#, execOnResize = TRUE)
     
     
   output$PlotCOBox <- renderPlot({
@@ -237,7 +237,7 @@ server <- function(input, output) {
     
     plot(pp())
     
-  }, width = 600, height = 700, bg = "transparent")
+  }, width = 900, height = 700, bg = "transparent")
     
   output$PlotPCA <- renderPlot({
     #par(mar = c(4, 4, .1, .1))
@@ -282,7 +282,7 @@ server <- function(input, output) {
       guides(color=guide_legend(title="Stress Level"))
     
 
-  },width = 600, height = 700)
+  },width = 900, height = 700)
     
     # output$downloadReport <- downloadHandler(
     #   filename = function() {
