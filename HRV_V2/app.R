@@ -19,17 +19,17 @@ library(caret)
 library(tidyr)
 library(broom)
 library(psych)
-library(imputeTS)
 library(ggpubr)
 library(shinythemes)
 library(ggthemes)
-#library(ggbiplot)
 library(shinyWidgets)
 library(tidyr)
 library(flexdashboard)
 library(plotly)
 library(DT)
 library(wesanderson)
+
+#load("Y:/Braintuning_Kuschel/Kuschel_home/All23_HRV_v1.RData")
 
 load("HRV_V2_w_msd.RData")
 
@@ -146,8 +146,8 @@ server <- function(input, output) {
       theme_minimal(base_size = 18) +
       theme(legend.position="top",legend.title = element_blank(), 
            legend.text = element_text(colour = "white"),
+           #plot.background = element_rect(colour = "transparent"),
            plot.title=element_text(family="Helvetica", face="bold", size=18, color = "white"),
-           
            axis.text.x = element_text(angle = 45, hjust = 1, color = "white"),
            axis.text.y = element_text(angle = 0, size=13 , color = "white"),
            axis.title.x = element_text(size=14, face="bold", vjust = -1, color = "white"),
@@ -178,6 +178,10 @@ server <- function(input, output) {
                 palette = "dark2", add = "reg.line", conf.int = T) + xlab("bpm") + 
         ylab(input$z) +
         theme_white() +
+        theme(#plot.background = element_rect(colour = "transparent"),
+              plot.background = element_rect(fill = "#333366",
+                                        colour = "#333366",
+                                        size = 0.5, linetype = "solid")) +
         stat_cor(aes(color = class, label =paste(..rr.label.., 
                                                  cut(..p.., breaks = c(-Inf, 0.0001, 0.001, 0.01, 0.05, Inf),
                                                      labels = c("'p-value ****'", 
@@ -220,7 +224,11 @@ server <- function(input, output) {
                      notch = FALSE) + labs(title = paste("Boxplot for ", input$z, " for ", input$period, " values", sep = "")) +
         xlab("Stress Level") + ylab(input$z) + #guides(colour = FALSE) +
         labs(caption = paste(input$period, " values taken into account",sep = "")) +
-        theme_white() + # Discrete color
+        theme_white() + 
+        theme(#plot.background = element_rect(colour = "transparent"),
+              plot.background = element_rect(fill = "#333366",
+                                              colour = "#333366",
+                                              size = 0.5, linetype = "solid")) + # Discrete color
         #scale_fill_manual(values = wes_palette("GrandBudapest1", n = 3))
         scale_fill_manual(values = wes_palette("Moonrise3", n = 3))
       
@@ -267,7 +275,11 @@ server <- function(input, output) {
       stat_ellipse(level = 0.95, size = 1, show.legend = FALSE) +
       geom_point(size = 5) +
       xlab(percentage[1]) + ylab(percentage[2]) +
-      theme_white()
+      theme_white() +
+      theme(#plot.background = element_rect(colour = "transparent"),
+            plot.background = element_rect(fill = "#333366",
+                                            colour = "#333366",
+                                            size = 0.5, linetype = "solid"))
     
 
   },width = 600, height = 700)
