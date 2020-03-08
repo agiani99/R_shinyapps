@@ -29,4 +29,5 @@ dependencies:
 - r-shinywidgets
 - r-tidyr
 - r-tidyverse
+- r-wesanderson
 - r-zoo
