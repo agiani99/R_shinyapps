@@ -22,6 +22,7 @@ dependencies:
 - r-heatmaply
 - r-lubridate
 - r-plotly
+- r-psych
 - r-rcolorbrewer
 - r-scales
 - r-shiny
