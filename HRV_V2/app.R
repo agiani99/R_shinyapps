@@ -7,27 +7,26 @@
 #    http://shiny.rstudio.com/
 #
 
+library(broom)
+library(caret)
+library(cowplot)
+library(DT)
 library(extrafont)
 loadfonts(device = "win")
-library(shiny)
-library(tidyverse)
-library(lubridate)
-library(zoo)
-library(scales)
-library(cowplot)
-library(caret)
-library(tidyr)
-library(broom)
-library(psych)
-library(ggpubr)
-library(shinythemes)
-library(ggthemes)
-library(shinyWidgets)
-library(tidyr)
 library(flexdashboard)
+library(ggpubr)
+library(ggthemes)
+library(lubridate)
 library(plotly)
-library(DT)
+library(psych)
+library(scales)
+library(shiny)
+library(shinythemes)
+library(shinyWidgets)
+library(tidyverse)
+library(tidyr)
 library(wesanderson)
+library(zoo)
 
 load("HRV_V2_w_msd.RData")
 
@@ -77,8 +76,10 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+
   
   temp <- all23 %>% select_if(is.numeric)
+  
   
   theme_white <- function (base_size = 12, base_family = "Helvetica") {
     half_line <- base_size/2
@@ -138,14 +139,16 @@ server <- function(input, output) {
       geom_line(aes(group = 1), size = 2) + ylab(input$y) +
       scale_x_datetime(date_breaks = "2 hour") +
       labs(title = paste("Spectrum of Prob_", input$x, " - ", all23[all23$ID == input$x, 2]$class,sep = "")) +
+      #annotate("label", x = zz(), y = min(get(input$y)), label = all23$class[ID == input$x]) 
       theme_minimal(base_size = 18) +
       theme(legend.position="top",legend.title = element_blank(), 
            legend.text = element_text(colour = "white"),
+           #plot.background = element_rect(colour = "transparent"),
            plot.title=element_text(family="Helvetica", face="bold", size=18, color = "white"),
            axis.text.x = element_text(angle = 45, hjust = 1, color = "white"),
            axis.text.y = element_text(angle = 0, size=13 , color = "white"),
            axis.title.x = element_text(size=14, face="bold", vjust = -1, color = "white"),
-           axis.title.y = element_text(size=14, face="bold", vjust = 2, color = "white"))
+           axis.title.y = element_text(size=14, face="bold", vjust = 2, color = "white")) 
     },width = 600, height = 700, bg = "transparent")#,execOnResize = TRUE)
     
   output$PlotCO <- renderPlot({
@@ -172,9 +175,11 @@ server <- function(input, output) {
                 palette = "dark2", add = "reg.line", conf.int = T) + xlab("bpm") + 
         ylab(input$z) +
         theme_white() +
-        theme(plot.background = element_rect(fill = "#2b3e50",
+        theme(#plot.background = element_rect(colour = "transparent"),
+              plot.background = element_rect(fill = "#2b3e50",
                                         colour = "#2b3e50",
                                         size = 0.5, linetype = "solid")) +
+        guides(fill=guide_legend(title="Stress Level")) +
         stat_cor(aes(color = class, label =paste(..rr.label.., 
                                                  cut(..p.., breaks = c(-Inf, 0.0001, 0.001, 0.01, 0.05, Inf),
                                                      labels = c("'p-value ****'", 
@@ -190,6 +195,7 @@ server <- function(input, output) {
     
     
   output$PlotCOBox <- renderPlot({
+    #par(mar = c(4, 4, .1, .1))
     
     temp4 <- reactive({
       if(input$period == "All"){
@@ -217,11 +223,13 @@ server <- function(input, output) {
         xlab("Stress Level") + ylab(input$z) + #guides(colour = FALSE) +
         labs(caption = paste(input$period, " values taken into account",sep = "")) +
         theme_white() + 
-        theme(plot.background = element_rect(fill = "#2b3e50",
+        theme(#plot.background = element_rect(colour = "transparent"),
+              plot.background = element_rect(fill = "#2b3e50",
                                               colour = "#2b3e50",
                                               size = 0.5, linetype = "solid")) + # Discrete color
         #scale_fill_manual(values = wes_palette("GrandBudapest1", n = 3))
-        scale_fill_manual(values = wes_palette("Moonrise3", n = 3))
+        scale_fill_manual(values = wes_palette("Moonrise3", n = 3)) +
+        guides(fill=guide_legend(title="Stress Level"))
       
       
       
@@ -232,6 +240,7 @@ server <- function(input, output) {
   }, width = 600, height = 700, bg = "transparent")
     
   output$PlotPCA <- renderPlot({
+    #par(mar = c(4, 4, .1, .1))
     
     temp3 <- reactive({
       if(input$period == "All"){
@@ -266,9 +275,11 @@ server <- function(input, output) {
       geom_point(size = 5) +
       xlab(percentage[1]) + ylab(percentage[2]) +
       theme_white() +
-      theme(plot.background = element_rect(fill = "#2b3e50",
+      theme(#plot.background = element_rect(colour = "transparent"),
+            plot.background = element_rect(fill = "#2b3e50",
                                             colour = "#2b3e50",
-                                            size = 0.5, linetype = "solid"))
+                                            size = 0.5, linetype = "solid")) +
+      guides(color=guide_legend(title="Stress Level"))
     
 
   },width = 600, height = 700)
@@ -332,6 +343,7 @@ server <- function(input, output) {
     req(input$x)
     
     dataset_scaled <- reactive({
+      #tt <- reactive({ names(all23_scaled) %in% c(input$myPicker) })
       tt <- reactive({ names(all23_scaled) %in% names(all23_scaled)[c(20,29,30,31,32,33,34,11,35,8)] })
       zz <- reactive({ c(input$x, "Sdev", "Mean") })
       ttt1 <- all23_scaled_ms[all23_scaled_ms$ID %in% zz() , ]
@@ -462,8 +474,8 @@ server <- function(input, output) {
     
 }
 
+
+
 # Run the application 
 shinyApp(ui = ui, server = server)
-
-
 
