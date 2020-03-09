@@ -7,28 +7,34 @@
 #    http://shiny.rstudio.com/
 #
 
-library(broom)
-library(caret)
-library(cowplot)
-library(DT)
 library(extrafont)
-#loadfonts(device = "win")
-library(flexdashboard)
-library(ggpubr)
-library(ggthemes)
-library(lubridate)
-library(plotly)
-library(psych)
-library(scales)
+loadfonts(device = "win")
 library(shiny)
-library(shinythemes)
-library(shinyWidgets)
 library(tidyverse)
-library(tidyr)
-library(wesanderson)
+library(lubridate)
 library(zoo)
+library(scales)
+library(cowplot)
+library(caret)
+library(tidyr)
+library(broom)
+library(psych)
+#library(imputeTS)
+library(ggpubr)
+library(shinythemes)
+library(ggthemes)
+#library(ggbiplot)
+library(shinyWidgets)
+library(flexdashboard)
+library(plotly)
+library(DT)
+library(wesanderson)
+library(heatmaply)
+library(dendextend)
 
-load("HRV_V2_w_msd.RData")
+#load("Y:/Braintuning_Kuschel/Kuschel_home/All23_HRV_v1.RData")
+
+load("Y:/Braintuning_Kuschel/Kuschel_home/HRV_V2/HRV_V2_w_msd.RData")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -58,7 +64,7 @@ ui <- fluidPage(
         tabPanel("Correlations ", plotOutput("PlotCO")),
         tabPanel("Box Plot ", plotOutput("PlotCOBox")),
         tabPanel("PCA ", plotOutput("PlotPCA")),
-        #tabPanel("Data",tableOutput("Table2")),
+        tabPanel("Heatmap",plotlyOutput("HMP")),
         tabPanel("Relax Level",
                  fluidRow(column(12, "Total",gaugeOutput('Gauge'),
                                  splitLayout(cellWidths = c("95%", "95%"),
@@ -149,7 +155,7 @@ server <- function(input, output) {
            axis.text.y = element_text(angle = 0, size=13 , color = "white"),
            axis.title.x = element_text(size=14, face="bold", vjust = -1, color = "white"),
            axis.title.y = element_text(size=14, face="bold", vjust = 2, color = "white")) 
-    },width = 900, height = 700, bg = "transparent")#,execOnResize = TRUE)
+    },width = 600, height = 700, bg = "transparent")#,execOnResize = TRUE)
     
   output$PlotCO <- renderPlot({
     #par(mar = c(4, 4, .1, .1))
@@ -191,7 +197,7 @@ server <- function(input, output) {
     
     p()
     
-    }, width = 900, height = 700, bg = "transparent")#, execOnResize = TRUE)
+    }, width = 600, height = 700, bg = "transparent")#, execOnResize = TRUE)
     
     
   output$PlotCOBox <- renderPlot({
@@ -237,7 +243,7 @@ server <- function(input, output) {
     
     plot(pp())
     
-  }, width = 900, height = 700, bg = "transparent")
+  }, width = 600, height = 700, bg = "transparent")
     
   output$PlotPCA <- renderPlot({
     #par(mar = c(4, 4, .1, .1))
@@ -285,15 +291,14 @@ server <- function(input, output) {
                                               size = 0.5, linetype = "solid")) +
         
         geom_text(data = llbb(), aes(x = PC1, y = PC2),
-                  label = substr(input$x,1,10), nudge_y = 0.1, nudge_x = 0.2) +
+                  label = substr(input$x,1,10) ,nudge_x = 0.1, nudge_y = 0.1) +
         guides(color= F) +
         guides(color=guide_legend(title="Stress Level")) 
     })
     
     p()
-    
 
-  },width = 900, height = 700)
+  },width = 600, height = 700)
     
     # output$downloadReport <- downloadHandler(
     #   filename = function() {
@@ -460,12 +465,50 @@ server <- function(input, output) {
     
   })
     
-  output$Table2 <- renderTable({ 
+  output$HMP <- renderPlotly({ 
     
-    req(ttt10())
+    f1 <- list(
+      family = "Arial",
+      size = 11,
+      color = "#2b3e50"
+    )
     
-    head(ttt10(), n = NROW(ttt10()) )},hover = TRUE,rownames = TRUE,digits = 2)
+    f2 <- list(
+      family = "Arial",
+      size = 11,
+      color = "#2b3e50"
+    )
     
+    a <- list(
+      tickfont = f1
+    )
+    
+    b <- list(
+      tickfont = f2
+    )
+    
+    
+    matr <- as.matrix(cor(all23[,-c(1,2)]))
+    
+    dend <- matr %>% dist %>% hclust %>% as.dendrogram %>% set("branches_col", 13)
+    
+    heatmaply_cor(matr, limits = c(-1,1), Rowv = dend,show_dendrogram = c(F,T),
+                  node_type = "heatmap",
+                  dendrogram = T, 
+                  row_dend_left = F,
+                  showticklabels = TRUE,
+                  subplot_margin = c(0,0,0.03,0)) %>% 
+      layout(width=700, height = 700) %>% 
+      layout(plot_bgcolor='transparent', xaxis = a, yaxis = b ,paper_bg_color = "transparent")#paper_bgcolor='#2b3e50')
+    
+    
+  })
+    
+    
+    # req(ttt10())
+    # 
+    # head(ttt10(), n = NROW(ttt10()) )},hover = TRUE,rownames = TRUE,digits = 2)
+    # 
     # output$Table <- DT::renderDT({
     #   
     #   options(DT.options = list(pageLength = 5))
