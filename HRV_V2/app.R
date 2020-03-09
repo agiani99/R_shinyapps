@@ -483,6 +483,16 @@ server <- function(input, output) {
       tickfont = f2
     )
     
+    if(input$period == "All"){
+        matr <- as.matrix(cor(all23[,-c(1,2,5)]))
+    }
+    else{
+      if(input$period == "Awake"){
+        matr <- as.matrix(cor(HRVday[,-c(2,33)]))
+      } else {
+        matr <- as.matrix(cor(HRVnight[,-c(2,33)]))
+      }
+    }
     
     matr <- as.matrix(cor(all23[,-c(1,2)]))
     
