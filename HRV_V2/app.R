@@ -8,7 +8,7 @@
 #
 
 library(extrafont)
-loadfonts(device = "win")
+#loadfonts(device = "win")
 library(shiny)
 library(tidyverse)
 library(lubridate)
