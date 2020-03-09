@@ -9,6 +9,7 @@ dependencies:
 - r-broom
 - r-caret
 - r-cowplot
+- r-dendextend
 - r-devtools
 - r-dt
 - r-extrafont
