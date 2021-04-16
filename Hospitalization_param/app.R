@@ -35,7 +35,7 @@ rho = -0.7
 ui <- fluidPage(
 
     # Application title
-    titlePanel("How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation"),
+    titlePanel("How parameters can affect hospitalization distribution and relative Meier-Kaplan analysis in a virtual Cohort generation (China-based glioblastoma longitudinal cohorts)"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
@@ -210,9 +210,9 @@ server<- function(input,output,session){
             geom_density((aes(hospitalization, fill = as.factor(outcome))), alpha = 0.6) +
             guides(fill=guide_legend(title="Outcome\n1=dead\n2=living")) +
             xlab("Hospitalization weeks") +
-            ggtitle(paste("Distribution of Hospitalization for ", input$n, " patients", 
-                          "using ", input$vv, " virtual visits \ntaken from a range of ", 
-                          input$maxvv, "dates", sep = ""))
+            ggtitle(paste("Distribution of Hospitalization time for ", input$n, " patients", 
+                          " using ", input$vv, " virtual visits \ntaken from a range of ", 
+                          input$maxvv, " dates", sep = ""))
         
         
     )
