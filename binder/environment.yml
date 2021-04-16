@@ -8,6 +8,7 @@ dependencies:
 - r-base
 - r-broom
 - r-caret
+- r-corrr
 - r-cowplot
 - r-dendextend
 - r-devtools
@@ -15,6 +16,7 @@ dependencies:
 - r-extrafont
 - r-flexdashboard
 - r-ggbiplot
+- r-ggforce
 - r-ggpubr
 - r-ggthemes
 - r-gridbase
@@ -26,9 +28,12 @@ dependencies:
 - r-psych
 - r-rcolorbrewer
 - r-scales
+- r-reshape2
 - r-shiny
 - r-shinythemes
 - r-shinywidgets
+- r-survival
+- r-survminer
 - r-tidyr
 - r-tidyverse
 - r-wesanderson
