@@ -16,8 +16,10 @@ library(reshape2)
 library(ggforce)
 library(gridExtra)
 
-load("J:/esp/Personal/Andrea Zaliani/takoua/China_cohort/China_cohort_v1.RData")
+#load("J:/esp/Personal/Andrea Zaliani/takoua/China_cohort/China_cohort_v1.RData")
+load("China_cohort_v1.RData")
 
+#functions
 complement <- function(y, rho, x) {
     if (missing(x)) x <- rnorm(length(y)) # Optional: supply a default if `x` is not given
     y.perp <- residuals(lm(x ~ y))
