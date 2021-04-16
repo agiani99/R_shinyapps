@@ -11,7 +11,9 @@ c) IME_Score2 is very similar to VCExplorer_CT. There are no wearables data invo
 
 d) Colorectal_100 is yet-another virtual cohort based on [Synthea](https://github.com/synthetichealth/synthea). Basic visulization are same as in the above examples. [Colorectal](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/colorectal_100/colorectal_100_app/)
 
-e) HRV_V2 is different. It tries to displays RR_intervals and BPM from cardio measurements coming from wearables (usually 24hrs). From these measurements a lot of derived parameters are produced. [See here for details](https://github.com/Aura-healthcare/hrvanalysis). A PCA for the cohort is provided and finally a set of gauge indicators will try to summarize the stress level of probands. [HRV_V2](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/HRV_V2/) 
+e) HRV_V2 is different. It tries to displays RR_intervals and BPM from cardio measurements coming from wearables (usually 24hrs). From these measurements a lot of derived parameters are produced. [See here for details](https://github.com/Aura-healthcare/hrvanalysis). A PCA for the cohort is provided and finally a set of gauge indicators will try to summarize the stress level of probands. [HRV_V2](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/HRV_V2/)
+
+e) This Shiny [Hospitalization](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/Hospitalization/)app has to do with the choice of best parameter to obtain the more realistic hospitalization time for a cohort in order to obtain a target Kaplan-Meier plot.  
 
 # Instructions
 --------------
