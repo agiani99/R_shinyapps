@@ -38,7 +38,7 @@ rho = -0.7
 ui <- fluidPage(
     
     # Application title
-    titlePanel("How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation vs Real-Data_World"),
+    titlePanel("How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation vs Real-World data"),
     
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
@@ -247,7 +247,7 @@ server<- function(input,output,session){
         fit2 <- survfit(surv_object ~ Age_class, data =test())
         
         plot(fit2, col = 1:3,lty=1:3, fun = "Surv", lwd = 3, 
-             main="Kaplan Meier survival plot for above virtual cohort and relative distribution",
+             main="Kaplan Meier survival plot and relative distribution \nin a synthetic cohort",
              xlab = "Hospitalization days", 
              ylab = "Overall survival probability",
              ylim = c(0, 1),
