@@ -3,9 +3,7 @@
 # the 'Run App' button above.
 #
 # Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+# reference data taken from: https://github.com/HAIRLAB/Pre_Surv_COVID_19/tree/master/data
 
 library(shiny)
 library(tidyverse)
