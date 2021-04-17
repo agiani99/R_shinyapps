@@ -14,7 +14,7 @@ library(reshape2)
 library(ggforce)
 library(gridExtra)
 
-load("J:/esp/Personal/Andrea Zaliani/takoua/Covid_VC_params_v4.RData")
+load("Covid_VC_params_v4.RData")
 
 complement <- function(y, rho, x) {
     if (missing(x)) x <- rnorm(length(y)) # Optional: supply a default if `x` is not given
