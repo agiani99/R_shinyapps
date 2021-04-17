@@ -13,7 +13,9 @@ d) Colorectal_100 is yet-another virtual cohort based on [Synthea](https://githu
 
 e) HRV_V2 is different. It tries to displays RR_intervals and BPM from cardio measurements coming from wearables (usually 24hrs). From these measurements a lot of derived parameters are produced. [See here for details](https://github.com/Aura-healthcare/hrvanalysis). A PCA for the cohort is provided and finally a set of gauge indicators will try to summarize the stress level of probands. [HRV_V2](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/HRV_V2/)
 
-e) This Shiny [Hospitalization](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/Hospitalization_param/) app has to do with the choice of best parameter to obtain the more realistic hospitalization time for a cohort in order to obtain a target Kaplan-Meier plot.  
+f) This Shiny [Hospitalization](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/Hospitalization_param/) app has to do with the choice of best parameter to obtain the more realistic hospitalization time for a cohort in order to obtain a target Kaplan-Meier plot.
+
+g) [Public COVID-19 reference data](https://github.com/HAIRLAB/Pre_Surv_COVID_19/tree/master/data) have been used for the following Shiny for [COVID-19 Hospitalization](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/COVID19_Hospitalization/). Here a comparison through the Kaplan-Meier plots is provided so that the parameters chosen for the virtual cohort can be checked against the real-world data.
 
 # Instructions
 --------------
