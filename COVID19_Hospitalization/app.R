@@ -40,8 +40,10 @@ rho = -0.7
 ui <- fluidPage(
     
     # Application title
-    titlePanel("How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation vs Real-Data_World"),
-    
+    #titlePanel("How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation vs Real-Data_World"),
+    titlePanel(title=div(img(src="ITMP_logo.jpg",
+                             height="15%", width="15%", align="right"),
+                         "How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation vs Real-Data_World")),
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
