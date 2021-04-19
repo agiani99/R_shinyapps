@@ -14,7 +14,7 @@ library(ggforce)
 library(gridExtra)
 library(lubridate)
 
-shinyOptions(cache = cachem::cache_disk("./app_cache/cache/"))
+#shinyOptions(cache = cachem::cache_disk("./app_cache/cache/"))
 
 load("J:/esp/Personal/Andrea Zaliani/takoua/Covid_VC_params_v4.RData")
 
