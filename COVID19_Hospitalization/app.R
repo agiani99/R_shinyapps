@@ -47,9 +47,9 @@ ui <- fluidPage(
         sidebarPanel(
             sliderInput("n", "Number of patients:", min = 100, max = 800, value = 375),
             sliderInput("vv", "Number of visits:", min = 2, max = 20, value = 6),
-            sliderInput("maxvv", "Date range max available", min = 1, max = 20, value = 10),
+            sliderInput("maxvv", "Date range max available", min = 1, max = 20, value = 10)#,
             # Button
-            downloadButton("downloadData", "Download as CSV")
+            #downloadButton("downloadData", "Download as CSV")
         ),
         
         # Show a plot of the generated distribution
@@ -348,17 +348,17 @@ server<- function(input,output,session){
     )
     # Downloadable csv of selected dataset ----
     
-    output$downloadData <- downloadHandler(
+    #output$downloadData <- downloadHandler(
         
-        filename = function(){
-            a <- paste("test_",format(Sys.time(), "%b_%d_%X"),".csv", sep = "")
-            gsub(":", "", a)
-        },
+    #    filename = function(){
+    #        a <- paste("test_",format(Sys.time(), "%b_%d_%X"),".csv", sep = "")
+    #        gsub(":", "", a)
+    #    },
         
-        content = function(file) {
-            write.csv(test3(), file, row.names = FALSE)
-        }
-    )
+    #    content = function(file) {
+    #        write.csv(test3(), file, row.names = FALSE)
+    #    }
+    #)
     
 }
 
