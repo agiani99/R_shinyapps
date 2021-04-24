@@ -317,9 +317,10 @@ server<- function(input,output,session){
         test() %>%
             select_at(c("PATIENT_ID","hospitalization", "gender", "Age_class", "outcome")) %>% 
             ggplot() +
-            geom_density((aes(hospitalization, fill = as.factor(outcome))), alpha = 0.6) +
+            geom_density((aes(hospitalization/86400, fill = as.factor(outcome))), alpha = 0.6) +
             guides(fill=guide_legend(title="Outcome 1=dead 0=living")) +
             xlab("Hospitalization days") +
+            #scale_x_continuous(breaks=seq(0, 7776000, 432000)/86400)+
             scale_x_continuous(breaks=seq(0, 60, 5))+
             theme(legend.position="bottom") +
             ggtitle(paste("Distribution of Hospitalization for ", input$n, " patients using ", 
