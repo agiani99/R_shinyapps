@@ -14,7 +14,7 @@ library(ggforce)
 library(gridExtra)
 library(lubridate)
 
-#shinyOptions(cache = cachem::cache_disk("./app_cache/cache/"))
+shinyOptions(cache = cachem::cache_disk("./app_cache/cache/"))
 
 load("J:/esp/Personal/Andrea Zaliani/takoua/Covid_VC_params_v4.RData")
 
@@ -41,17 +41,17 @@ ui <- fluidPage(
     
     # Application title
     #titlePanel("How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation vs Real-Data_World"),
-    titlePanel(title=div(img(src="ITMP_logo.jpg",
-                             height="15%", width="15%", align="right"),
+    titlePanel(title=div(img(src="ITMP_logo.png",
+                             height="10%", width="10%", align="right"),
                          "How chosen parameters affect hospitalization \nand Meier-Kaplan analysis in Virtual Cohort generation vs Real-Data_World")),
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
             sliderInput("n", "Number of patients:", min = 100, max = 800, value = 375),
             sliderInput("vv", "Number of visits:", min = 2, max = 20, value = 6),
-            sliderInput("maxvv", "Date range max available", min = 1, max = 20, value = 10)#,
+            sliderInput("maxvv", "Date range max available", min = 1, max = 20, value = 10),
             # Button
-            #downloadButton("downloadData", "Download as CSV")
+            downloadButton("downloadData", "Download as CSV")
         ),
         
         # Show a plot of the generated distribution
@@ -137,7 +137,7 @@ server<- function(input,output,session){
         #                               select_if(., is.numeric) %>%
         #                               select(-PATIENT_ID),
         #                           method = "pearson", use = "pairwise.complete.obs")
-        
+
         output <- data.frame(matrix(ncol = length(colnames(maxtestmale))+6, nrow = 1))
         colnames(output) <- c(colnames(VC_375),colnames(maxtestmale), "Visits_date")
         output <- output %>% select(PATIENT_ID, Visits_date, everything())
@@ -166,7 +166,7 @@ server<- function(input,output,session){
             }else{
                 #vv <- sample(2:6, 1, replace = F)
                 patient <- do.call("rbind", replicate(vv, patient, simplify = FALSE))
-                
+
                 deltas <- rnorm(cumsum(vv))
                 if(VC_375$Age_class[i] == 1){
                     Visits_date <- sort(start_cohort +  (deltas*maxvv*40000))
@@ -249,7 +249,7 @@ server<- function(input,output,session){
         
         rm(patient);rm(patient2);rm(datarnd);rm(cdatarnd);rm(output)
         
-        VC_375_data_KM <- VC_375_data %>% #select(PATIENT_ID, Visits_date, outcome, age, gender) %>% 
+        VC_375_data_KM <- VC_375_data %>% select(PATIENT_ID, Visits_date, outcome, age, gender) %>% 
             group_by(PATIENT_ID) %>% 
             mutate(start = min(Visits_date),
                    end = max(Visits_date),
@@ -259,29 +259,22 @@ server<- function(input,output,session){
             mutate(Age_class = as.numeric(as.factor(ifelse(age > 60, "Old", ifelse(age < 35,"Young", "Middle"))))) %>% 
             ungroup()
         
-        VC_375_data_KM <- VC_375_data_KM %>% select(-Visits_date) %>% mutate(hospday = hospitalization/86400)
-        
+        test <- as.data.frame(VC_375_data_KM, stringsAsFactors =F)
+            
     })
     
-    test2 <- reactive({
-        
-        test2 <- test() %>%  select(PATIENT_ID, hospday, outcome, age, gender, hospitalization, Age_class)
-        test2 <- as.data.frame(test2, stringsAsFactors =F)
-    })
     
-    test3 <- reactive({
-        test() %>% select(-hospitalization)
-    })
-
+    
+    
     #Kaplan-Meier
     
     pvc <- reactive({    
         
-        surv_object <- Surv(time = test2()$hospitalization/86400, event = test2()$outcome)
+        surv_object <- Surv(time = test()$hospitalization/86400, event = test()$outcome)
         #surv_object <- Surv(time = test$hospitalization, event = test$outcome)
         # dependence on Gender
         
-        fit2 <- survfit(surv_object ~ Age_class, data = test2())
+        fit2 <- survfit(surv_object ~ Age_class, data = test())
         #fit2 <- survfit(surv_object ~ Age_class, data = test)
         
         plot(fit2, col = 1:3,lty=1:3, fun = "surv", lwd = 3,
@@ -293,7 +286,7 @@ server<- function(input,output,session){
         axis(side=1,at=c(seq(from=0,to=120,by=5)))
         legend(1, .3, c("Middle", "Old", "Young"), col = 1:3, lty = 1:3)
         abline(h = 0.5, col = 'cyan', lwd = 1)
-        
+
         #plot(test()$hospitalization/86400, test()$outcome)
         
         
@@ -321,18 +314,18 @@ server<- function(input,output,session){
     
     output$distPlot <- renderPlot(
         
-        test2() %>%
+        test() %>%
             select_at(c("PATIENT_ID","hospitalization", "gender", "Age_class", "outcome")) %>% 
             ggplot() +
             geom_density((aes(hospitalization, fill = as.factor(outcome))), alpha = 0.6) +
             guides(fill=guide_legend(title="Outcome 1=dead 0=living")) +
             xlab("Hospitalization days") +
-            scale_x_continuous(breaks=seq(0, 50, 5))+
+            scale_x_continuous(breaks=seq(0, 60, 5))+
             theme(legend.position="bottom") +
             ggtitle(paste("Distribution of Hospitalization for ", input$n, " patients using ", 
                           input$vv, " virtual visits taken from a range of ",
-                          input$maxvv, " dates", sep = ""))
-        
+                         input$maxvv, " dates", sep = ""))
+            
         
         
     )
@@ -350,20 +343,23 @@ server<- function(input,output,session){
     )
     # Downloadable csv of selected dataset ----
     
-    #output$downloadData <- downloadHandler(
+    output$downloadData <- downloadHandler(
         
-    #    filename = function(){
-    #        a <- paste("test_",format(Sys.time(), "%b_%d_%X"),".csv", sep = "")
-    #        gsub(":", "", a)
-    #    },
+        # chenge the date back again
+        #test() <- test() #%>% 
         
-    #    content = function(file) {
-    #        write.csv(test3(), file, row.names = FALSE)
-    #    }
-    #)
+        filename = function(){
+            a <- paste("test_",format(Sys.time(), "%b_%d_%X"),".csv", sep = "")
+            gsub(":", "", a)
+            },
+        content = function(file) {
+            write.csv(test(), file, row.names = FALSE)
+        }
+    )
     
 }
 
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
