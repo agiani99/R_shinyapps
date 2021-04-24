@@ -236,7 +236,7 @@ server<- function(input,output,session){
         #fit2 <- survfit(surv_object ~ Age_class, data = test)
         
         plot(fit2, col = 1:3,lty=1:3, fun = "surv", lwd = 3,
-             main="Kaplan Meier survival plot for above virtual cohort and relative distribution",
+             main="Kaplan Meier survival plot for above virtual cohort\nand relative distribution",
              xlab = "Cohort weeks",
              ylab = "Overall survival probability",
              ylim = c(0, 1),
@@ -259,7 +259,7 @@ server<- function(input,output,session){
         #fit2 <- survfit(surv_object ~ Age_class, data = test)
         
         plot(fit3, col = 2:7,lty=2:7, fun = "surv", lwd = 2,
-             main="Kaplan Meier survival plot for above virtual cohort and relative distribution",
+             main="Kaplan Meier survival plot for above virtual cohort\nand relative distribution",
              xlab = "Cohort weeks",
              ylab = "Overall survival probability",
              ylim = c(0, 1),
@@ -306,10 +306,7 @@ server<- function(input,output,session){
     # Downloadable csv of selected dataset ----
     
     output$downloadData <- downloadHandler(
-        
-        # chenge the date back again
-        #test() <- test() #%>% 
-        
+               
         filename = function(){
             a <- paste("test_",format(Sys.time(), "%b_%d_%X"),".csv", sep = "")
             gsub(":", "", a)
