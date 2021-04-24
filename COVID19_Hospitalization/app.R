@@ -14,7 +14,7 @@ library(ggforce)
 library(gridExtra)
 library(lubridate)
 
-shinyOptions(cache = cachem::cache_disk("./app_cache/cache/"))
+#shinyOptions(cache = cachem::cache_disk("./app_cache/cache/"))
 
 load("J:/esp/Personal/Andrea Zaliani/takoua/Covid_VC_params_v4.RData")
 
@@ -133,10 +133,10 @@ server<- function(input,output,session){
         VC_375 <- VC_375 %>% ungroup()
         
         
-        # correlations <- correlate(test_covid %>%
-        #                               select_if(., is.numeric) %>%
-        #                               select(-PATIENT_ID),
-        #                           method = "pearson", use = "pairwise.complete.obs")
+        correlations <- correlate(test_covid %>%
+                                      select_if(., is.numeric) %>%
+                                      select(-PATIENT_ID),
+                                  method = "pearson", use = "pairwise.complete.obs")
 
         output <- data.frame(matrix(ncol = length(colnames(maxtestmale))+6, nrow = 1))
         colnames(output) <- c(colnames(VC_375),colnames(maxtestmale), "Visits_date")
