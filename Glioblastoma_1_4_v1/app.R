@@ -8,7 +8,7 @@ library(reshape2)
 library(ggforce)
 library(gridExtra)
 
-load("J:/esp/Personal/Andrea Zaliani/takoua/Glioblastoma_1_4/VC_Glioblastoma_1_4.RData")
+load("VC_Glioblastoma_1_4.RData")
 
 #local functions
 
