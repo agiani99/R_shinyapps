@@ -17,6 +17,8 @@ f) This Shiny [Hospitalization](https://mybinder.org/v2/gh/agiani99/R_shinyapps/
 
 g) [Public COVID-19 reference data](https://github.com/HAIRLAB/Pre_Surv_COVID_19/tree/master/data) have been used for the following Shiny for [COVID-19 Hospitalization](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/COVID19_Hospitalization/). Here a comparison through the Kaplan-Meier plots is provided so that the parameters chosen for the virtual cohort can be checked against the real-world data.
 
+h) Starting from data reported in a [glioblastoma trial](https://pubmed.ncbi.nlm.nih.gov/28861666/), Takoua Korchani and me developed a [Virtual Cohort](https://mybinder.org/v2/gh/agiani99/R_shinyapps/master?urlpath=shiny/Glioblastoma_1_4_v1/) which generates n patients with either Grad_I or Grad_IV glioblastoma and which can be visualized here
+
 # Instructions
 --------------
 
