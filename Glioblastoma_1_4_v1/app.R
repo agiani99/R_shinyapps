@@ -19,7 +19,7 @@ ui <- fluidPage(
     # Application title
     #titlePanel("How some parameters affect Hospitalization ditribution in Takoua VC Script"),
     titlePanel(title=div(img(src="ITMP_logo.png",
-                             height="15%", width="15%", align="right"),
+                             height="12%", width="12%", align="right"),
                          "How some parameters affect Cohort time distribution in Takoua VC Script")),
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
