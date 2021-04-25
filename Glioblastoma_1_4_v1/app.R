@@ -229,11 +229,11 @@ server<- function(input,output,session){
     pvc <- reactive({    
         
         surv_object <- Surv(time = test()$cohorttime, event = test()$outcome)
-        #surv_object <- Surv(time = test$hospitalization, event = test$outcome)
+        
         # dependence on Gender
         
         fit2 <- survfit(surv_object ~ Age_group, data = test())
-        #fit2 <- survfit(surv_object ~ Age_class, data = test)
+        
         
         plot(fit2, col = 1:3,lty=1:3, fun = "surv", lwd = 3,
              main="Kaplan Meier survival plot for above virtual cohort\nand relative distribution",
@@ -248,18 +248,18 @@ server<- function(input,output,session){
         for (a in 1:length(t$median)){
             segments(t$median[a],-.05, t$median[a], 0.5, col = 'darkblue', lwd = 1, lty = 2)
         
-        #plot(test()$hospitalization/86400, test()$outcome)
+        
 
     })
     
     pReal <- reactive({
         
         surv_object <- Surv(time = test()$cohorttime, event = test()$outcome)
-        #surv_object <- Surv(time = test$hospitalization, event = test$outcome)
+        
         # dependence on Gender
         
         fit3 <- survfit(surv_object ~ location, data = test())
-        #fit2 <- survfit(surv_object ~ Age_class, data = test)
+        
         
         plot(fit3, col = 2:7,lty=2:7, fun = "surv", lwd = 2,
              main="Kaplan Meier survival plot for above virtual cohort\nand relative distribution",
@@ -273,7 +273,7 @@ server<- function(input,output,session){
         tt <- as.data.frame(summary(fit3)$table)
         for (a in 1:length(tt$median)){
             segments(tt$median[a],-.05, tt$median[a], 0.5, col = 'darkblue', lwd = 1, lty = 2)
-        
+        }
         
     })
     
