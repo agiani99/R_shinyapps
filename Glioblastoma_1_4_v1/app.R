@@ -243,7 +243,10 @@ server<- function(input,output,session){
              xlim= c(0, 250))
         axis(side=1,at=c(seq(from=0,to=250,by=25)))
         legend(1, .3, c("Middle", "Old", "Young"), col = 1:3, lty = 1:3)
-        abline(h = 0.5, col = 'cyan', lwd = 1)
+        abline(h = 0.5, col = 'darkblue', lwd = 1, lty = 2)
+        t <- as.data.frame(summary(fit2)$table)
+        for (a in 1:length(t$median)){
+            segments(t$median[a],-.05, t$median[a], 0.5, col = 'darkblue', lwd = 1, lty = 2)
         
         #plot(test()$hospitalization/86400, test()$outcome)
 
@@ -266,7 +269,10 @@ server<- function(input,output,session){
              xlim= c(0, 250))
         axis(side=1,at=c(seq(from=0,to=250,by=25)))
         legend(1, .35, c("Cerebellum","Frontal","Occipital","Other","Parietal","Temporal"), col = 2:7, lty = 2:7)
-        abline(h = 0.5, col = 'cyan', lwd = 1)
+        abline(h = 0.5, col = 'darkblue', lwd = 1, lty = 2)
+        tt <- as.data.frame(summary(fit3)$table)
+        for (a in 1:length(tt$median)){
+            segments(tt$median[a],-.05, tt$median[a], 0.5, col = 'darkblue', lwd = 1, lty = 2)
         
         
     })
