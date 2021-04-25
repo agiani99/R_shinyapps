@@ -247,9 +247,7 @@ server<- function(input,output,session){
         t <- as.data.frame(summary(fit2)$table)
         for (a in 1:length(t$median)){
             segments(t$median[a],-.05, t$median[a], 0.5, col = 'darkblue', lwd = 1, lty = 2)
-        
-        
-
+        }
     })
     
     pReal <- reactive({
@@ -274,7 +272,6 @@ server<- function(input,output,session){
         for (a in 1:length(tt$median)){
             segments(tt$median[a],-.05, tt$median[a], 0.5, col = 'darkblue', lwd = 1, lty = 2)
         }
-        
     })
     
     output$distPlot <- renderPlot(
