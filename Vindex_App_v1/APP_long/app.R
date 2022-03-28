@@ -13,7 +13,7 @@ library(ggpubr)
 library(scales)
 
 
-load("merging_longitudinal_app.RData")
+load("../merging_longitudinal_app.RData")
 
 nms2 <- as.character(unique(extra_DB$variable))
 nms <-  extra_DB %>% filter(substring(Control_Group,1,1) != "T") %>% dplyr::select(Patient_ID) %>% unique() %>% unlist() %>% unname()
