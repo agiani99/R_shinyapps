@@ -1,12 +1,3 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(plotly)
 library(tidyverse)
@@ -22,7 +13,7 @@ library(ggpubr)
 library(scales)
 
 
-#load("J:/esp/projects/ESP Projects Active/Vitality_Index_Spiegeldatenbank (CC)/GeneratedData/VIndex/MongoDB/merging_longitudinal_app.RData")
+load("merging_longitudinal_app.RData")
 
 nms2 <- as.character(unique(extra_DB$variable))
 nms <-  extra_DB %>% filter(substring(Control_Group,1,1) != "T") %>% dplyr::select(Patient_ID) %>% unique() %>% unlist() %>% unname()
