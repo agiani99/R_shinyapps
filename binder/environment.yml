@@ -21,12 +21,15 @@ dependencies:
 - r-ggthemes
 - r-gridbase
 - r-gridextra
+- r-gt
+- r-gtsummary
 - r-gtable
 - r-heatmaply
 - r-lubridate
 - r-plotly
 - r-psych
 - r-rcolorbrewer
+- r-readxl
 - r-scales
 - r-reshape2
 - r-shiny
