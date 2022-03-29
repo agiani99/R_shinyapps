@@ -158,7 +158,7 @@ server <- function(input, output) {
            scale_x_datetime(name= "TIme", date_breaks="weeks", labels=date_format("%m-%Y"))+
            theme(axis.text.x = element_text(angle = 45, hjust=1)) +
            xlab("Time") + ylab("Value")+
-           scale_y_continuous(breaks = seq(60, 200, by = 20)) +
+           scale_y_continuous(breaks = seq(0, 200, by = 25)) +
            labs(color = "Measurements") +
            ggtitle(paste("Longitudinal Plot of ",nrow(dataset()), " points of chosen variables\n",
                          input$x, "\nand\n", input$color, " for Patient ", input$PatID, " (Areas are taken from Control Group data)",
