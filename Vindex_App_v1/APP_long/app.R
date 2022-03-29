@@ -213,8 +213,8 @@ server <- function(input, output) {
      dataset()
      dataset_true()} , {
        
-       mm <- full_join(dataset(), dataset_true(), by = c("Patient_ID","Gender","variable", "value", "Control_Group")) %>% 
-         dplyr::select(variable, value, Control_Group) %>% arrange(desc(Control_Group))
+       mm <- full_join(dataset(), dataset_true(), by = c("Patient_ID","Gender","variable", "value", "Control_Group")) %>% distinct() %>%
+         dplyr::select(variable, value, Control_Group) %>% arrange(desc(Control_Group)) 
        
        return(mm)
        
