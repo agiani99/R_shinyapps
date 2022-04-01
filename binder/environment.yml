@@ -15,6 +15,7 @@ dependencies:
 - r-dt
 - r-extrafont
 - r-flexdashboard
+- r-fmsb
 - r-ggbiplot
 - r-ggforce
 - r-ggpubr
