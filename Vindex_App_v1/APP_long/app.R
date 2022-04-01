@@ -1,3 +1,12 @@
+#
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
+
 library(shiny)
 library(plotly)
 library(tidyverse)
@@ -50,8 +59,9 @@ ui <- fluidPage(
         # selectInput('y', 'LongitudinalY', choices = names(nontidy_VC)[c(1,3:115)], selected = "KC_68_Trimg..mm"),
         selectInput('x', 'CohortParameter.1', choices = nmsnumeric, selected = "Blutdruck_Diastolic"),
         selectInput('color', 'CohortParameter.2', choices =nmsnumeric, selected = "Blutdruck_Systolic"),
-        selectInput('PatID', 'Training Patient_no',choices = nms, multiple = F,selected = nms[c(5)]),
-        checkboxInput("hline",label = "Graph lines on/off", value = FALSE)),
+        selectInput('PatID', 'Training Patient_no',choices = nms, multiple = F,selected = nms[c(1)]),
+        checkboxInput("hline",label = "Graph lines on/off", value = FALSE),
+        checkboxInput("ribbon", label = "Range/Mean+/-SD on/off", value = T)),
   mainPanel(
         tabsetPanel(type = "tabs",
                     tabPanel("Longitudinal", plotOutput('trendPlot')),
@@ -82,10 +92,10 @@ server <- function(input, output) {
                 arrange(Timestamp) %>% mutate(value = as.numeric(value))
             
             # tt <- extra_DB %>% filter(variable %in% c("Blutdruck_Systolic","Blutdruck_Diastolic")) %>%
-            #     filter(Patient_ID %in% c(nms[5])) %>%
+            #     filter(Patient_ID %in% c(nms[1])) %>%
             #     mutate(Timestamp = ymd_hms(Timestamp)) %>%
             #     #mutate(date = as.Date(Timestamp)) %>%
-            #     arrange(Timestamp) %>% mutate(value = as.numeric(value))  
+            #     arrange(Timestamp) %>% mutate(value = as.numeric(value))
 
                 
             return(tt)
@@ -101,17 +111,25 @@ server <- function(input, output) {
                 dplyr::select(-all_of(c("Gender", "class"))) %>%
                 mutate(Timestamp = ymd_hms(Timestamp), date = as.Date(Timestamp)) %>%
                 group_by(variable) %>% 
-                mutate(maxvalue = max(as.numeric(value), na.rm = T), minvalue = min(as.numeric(value), na.rm=TRUE)) %>% ungroup() %>% 
-              dplyr::select(value, variable, maxvalue, minvalue)
+                mutate(maxvalue = max(as.numeric(value), na.rm = T), 
+                       minvalue = min(as.numeric(value), na.rm=T),
+                       means = mean(as.numeric(value), na.rm = T),
+                       stdv = sd(as.numeric(value), na.rm = T) ) %>% 
+              ungroup() %>% 
+              dplyr::select(value, variable, maxvalue, minvalue, means, stdv)
                 
             
             # ll <- extra_DB %>% filter(variable %in% c("Blutdruck_Systolic","Blutdruck_Diastolic")) %>%
-            #     filter(substring(Control_Group,1,1) == "T") %>%
-            #     dplyr::select(-all_of(c("Gender", "class"))) %>%
-            #     mutate(Timestamp = ymd_hms(Timestamp), date = as.Date(Timestamp)) %>%
-            #     group_by(variable) %>%
-            #     mutate(maxvalue = max(as.numeric(value), na.rm = T), minvalue = min(as.numeric(value), na.rm=TRUE)) %>% ungroup() %>% 
-            #   dplyr::select(value, variable, maxvalue, minvalue)
+            #   filter(substring(Control_Group,1,1) == "T") %>%
+            #   dplyr::select(-all_of(c("Gender", "class"))) %>%
+            #   mutate(Timestamp = ymd_hms(Timestamp), date = as.Date(Timestamp)) %>%
+            #   group_by(variable) %>% 
+            #   mutate(maxvalue = max(as.numeric(value), na.rm = T), 
+            #          minvalue = min(as.numeric(value), na.rm=T),
+            #          means = mean(as.numeric(value), na.rm = T),
+            #          stdv = sd(as.numeric(value), na.rm = T) ) %>% 
+            #   ungroup() %>% 
+            #   dplyr::select(value, variable, maxvalue, minvalue, means, stdv)
 
             return(ll)
 
@@ -121,7 +139,7 @@ server <- function(input, output) {
         dataset()
         dataset_x()} , {
             
-            mm <- merge(dataset(), dataset_x(), by = c("variable", "value"))
+            mm <- merge(dataset(), dataset_x(), by = c("variable", "value")) %>% distinct()
 
             return(mm)
 
@@ -148,14 +166,18 @@ server <- function(input, output) {
            
       if (input$hline) {
            p <- p + geom_line(size = 1)
-       }else{ p }
+      }else{ p }
        
-       p + geom_ribbon(aes(x=Timestamp, ymax = as.numeric(maxvalue), ymin = as.numeric(minvalue), fill = variable), alpha=.1,
-                       show.legend = F) 
-            
-        #ggplotly(p, width = 700, height = 700) %>% layout(legend = list(orientation = 'h'))
-        
-        })
+       
+      if(input$ribbon) {
+        p + geom_ribbon(aes(x=Timestamp, ymax = as.numeric(maxvalue), ymin = as.numeric(minvalue), fill = variable), alpha=.1,
+                       show.legend = F)
+        }
+       else{
+        p + geom_ribbon(aes(x=Timestamp, ymax = as.numeric(means) + as.numeric(stdv), ymin = as.numeric(means) - as.numeric(stdv), 
+                            fill = variable), alpha=.1, show.legend = F)
+         }
+  })
    
    output$summary <- renderTable({
      
