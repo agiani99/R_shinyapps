@@ -167,18 +167,27 @@ server <- function(input, output) {
       colsel2 <- intersect(names(minnDB), names(maxnDB))
       colsel3 <- intersect(colsel, colsel2)
       
-      aves <- averagesDB[, colsel3]
-      pates <- radar_df()[,colsel3]
-      mines <- minnDB[,colsel3]
-      maxes <- maxnDB[,colsel3]
+      colradarelisa <- c("Timestamp","MNGDB_SpO2..SauerstoffsÃ.ttigung.....","STUDYDB_Blutdruck_Systolic",
+                         "STUDYDB_Blutdruck_Diastolic", "STUDYDB_Blutzucker",  "SECA_BMI.value", "Level",
+                         "MNGDB_Mittelwert_Rechts" , "MNGDB_cLac..L....Lactat.Konzentration...mmol.l." )
+      
+      colsel4 <- intersect(colradarelisa, colsel3)
+      
+      
+      aves <- averagesDB[, colsel4]
+      pates <- radar_df()[,colsel4]
+      mines <- minnDB[,colsel4]
+      maxes <- maxnDB[,colsel4]
       
       rdr <- rbind(mines, maxes, aves, pates)
       
-      colradar <- c("Alter", "SECA_Height.value", "SECA_Weight.value" , "SECA_FMI.value", "SECA_Total.Body.Water.value", "STUDYDB_Blutdruck_Systolic",
-                    "STUDYDB_Blutdruck_Diastolic",
-                    "SECA_Relative.fat.mass.value", "SECA_BMI.value", "STUDYDB_Koerpertemperatur")
+      # colradar <- c("Alter", "SECA_Height.value", "SECA_Weight.value" , "SECA_FMI.value", "SECA_Total.Body.Water.value", "STUDYDB_Blutdruck_Systolic",
+      #               "STUDYDB_Blutdruck_Diastolic",
+      #               "SECA_Relative.fat.mass.value", "SECA_BMI.value", "STUDYDB_Koerpertemperatur")
       
-      rdr <- rdr[,colradar]
+      
+      
+      rdr <- rdr[,colsel4]
       rdr
       
       
