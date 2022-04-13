@@ -26,6 +26,27 @@ nmsnumeric <- extra_DB_2 %>% filter(class == "numeric") %>% dplyr::select(variab
     unlist() %>% 
     as.character() %>% sort()
 
+
+
+# dataset_pca <- extra_DB_2 %>% 
+#   filter(class == "numeric") %>% 
+#   filter(!is.na(value)) %>% dplyr::select(-class) %>% 
+#   dplyr::filter(substr(variable,1,3) != "Wie") %>% 
+#   dplyr::filter(substr(variable,1,5) != "Haben") %>% 
+#   dplyr::filter(substr(variable,1,3) != "Mit") %>% 
+#   dplyr::distinct(variable, value, Timestamp, .keep_all = TRUE) %>% 
+#   pivot_wider(.,values_from = value, names_from = variable)
+#   
+#names(dataset_pca)
+#table(dataset_pca$Control_Group)
+
+#dataset_pca[, c(5:6,9:176)] <- lapply(dataset_pca[, c(5:6,9:176)], as.numeric)
+
+#not_all_na <- function(x) any(!is.na(x))
+#dataset_pca <- dataset_pca %>% select(where(not_all_na))
+
+
+
 ui <- fluidPage(
   
   titlePanel(title=div(img(src="ITMP_logo.png", #height="30%", width="20%", 
@@ -145,7 +166,7 @@ server <- function(input, output) {
         averagesPAT <- extra_DB_2 %>% 
           filter(Patient_ID == input$PatID) %>% 
           filter(class== "numeric") %>% 
-          dplyr::select(-all_of(c("class", "Control_Group", "Dropout_03_2022", "Dropout", "Timestamp"))) %>%
+          dplyr::select(-all_of(c("class", "Control_Group", "Dropout_03_2022", "Timestamp"))) %>%
           dplyr::filter(!is.na(value)) %>%
           dplyr::mutate(variable = as.character(variable)) %>% 
           dplyr::mutate(value = as.numeric(value)) %>% 
@@ -377,5 +398,8 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
+
+
 
 
