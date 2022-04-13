@@ -14,8 +14,6 @@ library(ggpubr)
 library(scales)
 library(fmsb)
 
-
-#load("J:/esp/projects/ESP Projects Active/Vitality_Index_Spiegeldatenbank (CC)/GeneratedData/VIndex/MongoDB/merging_longitudinal_app.RData")
 load("../longitudinal_assembly.RData")
 
 nms2 <- as.character(unique(extra_DB_2$variable))
